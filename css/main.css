@@ -1,3 +1,17 @@
 @import url(../bower_components/bootstrap/dist/css/bootstrap.css);
+body {
+  background: #343d46; }
+  @media (max-width: 375px) {
+    body {
+      font-size: 10px; } }
+
+.article-list {
+  list-style-type: none; }
+
+.article-title {
+  font-size: 2em; }
+
+.article-snippet {
+  margin-bottom: 20px; }
 
 /*# sourceMappingURL=main.css.map */

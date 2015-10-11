@@ -1,1 +1,38 @@
 @import "../bower_components/bootstrap/dist/css/bootstrap.css";
+@mixin bp($point) {
+    @if $point==mobile {
+        @media (max-width: 375px) {
+            @content;
+        }
+    }
+    @else if $point==tablet {
+        @media (min-width: 376px) and (max-width: 768px) {
+            @content;
+        }
+    }
+    @else if $point==desktop {
+        @media(min-width: 1024) {
+            @content;
+        }
+    }
+}
+
+body {
+	@include bp(mobile) {
+		font-size: 10px;
+	}
+	background: #343d46;
+}
+
+.article-list {
+    list-style-type: none;
+}
+
+
+.article-title {
+    font-size: 2em;
+}
+
+.article-snippet {
+	margin-bottom: 20px;
+}
