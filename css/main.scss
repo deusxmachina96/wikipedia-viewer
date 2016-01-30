@@ -30,8 +30,11 @@ body {
 	background: #343d46;
 }
 
-.article-list {
+ul {
     list-style-type: none;
+}
+
+.article-list {
     margin-top: 20px;
     margin-left: -20px;
     li {
@@ -75,7 +78,7 @@ textarea:focus, input:focus{
     }
     padding-left: 10px;
 	@include bp(mobile) {
-		width: 95%;
+		width: 75%;
 	}
 
 	@include bp(desktop) {
@@ -87,4 +90,30 @@ textarea:focus, input:focus{
 .search-button {
 	margin-left: -25px;
 	cursor: pointer;
+}
+
+.random-button {
+    background-color: transparent;
+    margin-left: 20px;
+    color: $orange;
+    border: 3px solid $orange;
+    border-radius: 20px;
+}
+
+.autocomplete-list {
+    li {
+        margin-left: -20px;
+        margin-top: 5px;
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
+    @include bp(desktop) {
+        width: 48%;
+        margin-left: 21%;
+    }
+    border-radius: 10px;
+    background-color: #FFF;
 }

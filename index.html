@@ -16,7 +16,6 @@
     <![endif]-->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/controllers.js"></script>
 </head>
@@ -27,17 +26,27 @@
             <div class="col-xs-12 col-lg-6 col-lg-offset-3">
                 <div class="search-box">
                     <form action="#" ng-submit="search(query)">
-                        <input type="text" class="input-box" ng-model="query" placeholder="Search Wikipedia...">
+                        <input type="text" class="input-box" ng-model="query" ng-change="autocomplete(query)" placeholder="Search Wikipedia..." ng-model-options="{ debounce: 300 }">
                         <span class="glyphicon glyphicon-search search-button" aria-hidden="true"  ng-click="search(query)"></span>
+                        <input type="button" class="random-button" value="Random" ng-click="randomSearch()">
                     </form>
                 </div>
             </div>
         </div>
         <div class="row">
+          <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+            <ul class="autocomplete-list">
+              <li ng-repeat="suggestion in autocompleteData">
+                <div><a onclick="bleh()" ng-href="{{suggestion.link}}">{{suggestion.text | limitTo: 34}}{{suggestion.text.length > 20 ? '&hellip;' : ''}}</a></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12">
                 <ul class="article-list">
                     <li ng-repeat="article in data">
-                        <div class="article-title"><a ng-href="{{'https://en.wikipedia.org/?curid=' + article.pageid}}">{{article.title}}</a></div>
+                        <div class="article-title"><a target="_blank" ng-href="{{'https://en.wikipedia.org/?curid=' + article.pageid}}">{{article.title}}</a></div>
                         <div class="article-snippet">{{article.extract}}</div>
                     </li>
             </div>
@@ -45,6 +54,20 @@
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".input-box").focusout(function(event){
+          window.setTimeout(function() { $('.autocomplete-list').hide() }, 100);
+        });
+        $(".input-box").focusin(function(event){
+          $(".autocomplete-list").show();
+        });
+      });
+
+      function bleh(){
+        console.log("link click");
+      }
+    </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
